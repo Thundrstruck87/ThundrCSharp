@@ -80,5 +80,24 @@ namespace Vinyl_Catalog
             }
             con.Close();            
         }
+        
+         private void remove_Click(object sender, EventArgs e)
+        {
+            SqlConnection con = new SqlConnection("Data Source=[server];Initial Catalog=catalog;User ID=sa;Password=[Password]");
+            con.Open();
+            SqlCommand cmd = new SqlCommand("delete from vinyl where artist =('" + remove_artist.Text +"')", con);
+            int i = cmd.ExecuteNonQuery();
+            if (i != 0)
+            {
+                MessageBox.Show("The artist has been removed!");
+                this.catalogDataSet.Reset();
+                this.vinylTableAdapter.Fill(this.catalogDataSet.vinyl);
+            }
+            else
+            {
+                MessageBox.Show("error");
+            }
+            con.Close();
+        }
     }
 }
