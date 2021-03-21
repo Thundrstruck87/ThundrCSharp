@@ -21,13 +21,13 @@ namespace Vinyl_Catalog
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+       private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             // ----- SQL Database Connection ----- //
 
             string connectionString;
             SqlConnection cnn;
-            connectionString = @"Data Source=[server];Initial Catalog=catalog;User ID=sa;Password=[password]";
+            connectionString = @"Data Source=[Server];Initial Catalog=catalog;User ID=sa;Password=[Password]";
             cnn = new SqlConnection(connectionString);
             cnn.Open();
 
@@ -48,11 +48,10 @@ namespace Vinyl_Catalog
                 // ----- dataReader.GetValue(0) is the first column, dataReader.GetValue(1) is the second column, dataReader.GetValue(2) is the third column. First position index to 0 ----- //
             }
             MessageBox.Show(Output);
-            
+
             dataReader.Close();
             command.Dispose();
             cnn.Close();
-
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -85,17 +84,17 @@ namespace Vinyl_Catalog
         {
             SqlConnection con = new SqlConnection("Data Source=[server];Initial Catalog=catalog;User ID=sa;Password=[Password]");
             con.Open();
-            SqlCommand cmd = new SqlCommand("delete from vinyl where artist =('" + remove_album.Text +"')", con);
+            SqlCommand cmd = new SqlCommand("delete from vinyl where album =('" + remove_album.Text +"')", con);
             int i = cmd.ExecuteNonQuery();
             if (i != 0)
             {
-                MessageBox.Show("The artist has been removed!");
+                MessageBox.Show("The album has been removed!");
                 this.catalogDataSet.Reset();
                 this.vinylTableAdapter.Fill(this.catalogDataSet.vinyl);
             }
             else
             {
-                MessageBox.Show("error");
+                MessageBox.Show("Sorry, please try again");
             }
             con.Close();
         }
