@@ -85,7 +85,7 @@ namespace Vinyl_Catalog
         {
             SqlConnection con = new SqlConnection("Data Source=[server];Initial Catalog=catalog;User ID=sa;Password=[Password]");
             con.Open();
-            SqlCommand cmd = new SqlCommand("delete from vinyl where artist =('" + remove_artist.Text +"')", con);
+            SqlCommand cmd = new SqlCommand("delete from vinyl where artist =('" + remove_album.Text +"')", con);
             int i = cmd.ExecuteNonQuery();
             if (i != 0)
             {
